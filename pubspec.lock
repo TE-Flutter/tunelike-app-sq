@@ -438,7 +438,7 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: HEAD
+      ref: master
       resolved-ref: "0459fcb2a32726d1ab1ef24f6b43a219bf9656a2"
       url: "https://github.com/ElBatanony/soar_quest"
     source: git
