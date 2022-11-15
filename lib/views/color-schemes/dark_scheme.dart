@@ -63,8 +63,10 @@ class MainDarkTheme {
 
 const ColorScheme _customColorScheme = ColorScheme(
   primary: customPrimaryCoal,
+  // ignore: deprecated_member_use
   primaryVariant: customWhitePowder,
   secondary: Colors.amber,
+  // ignore: deprecated_member_use
   secondaryVariant: customWhitePowder,
   surface: Colors.purpleAccent,
   background: customSurfaceCoal,

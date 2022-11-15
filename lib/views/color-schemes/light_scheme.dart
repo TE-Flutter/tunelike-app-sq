@@ -15,44 +15,44 @@ class MainLightTheme {
     textTheme: const TextTheme(
       bodyText1: TextStyle(
         fontSize: 22,
-        color: customWhitePearl,
+        color: customSurfaceCoal,
       ),
       bodyText2: TextStyle(
-        color: customWhitePowder,
+        color: customSurfaceCoal,
         fontSize: 18,
         fontWeight: FontWeight.bold,
-        backgroundColor: customBackgroundCoal,
+        backgroundColor: customWhitePearl,
       ),
       caption: TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.bold,
         fontStyle: FontStyle.italic,
-        color: customWhitePowder,
-        backgroundColor: customPrimaryCoal,
+        color: customSurfaceCoal,
+        backgroundColor: customWhitePearl,
       ),
       headline1: TextStyle(
-        color: customWhitePowder,
+        color: customSurfaceCoal,
         fontSize: 60,
         fontFamily: 'Allison',
         fontWeight: FontWeight.bold,
       ),
       headline2: TextStyle(
-        color: customWhitePowder,
+        color: customSurfaceCoal,
         fontSize: 25,
         fontWeight: FontWeight.bold,
       ),
     ),
-    scaffoldBackgroundColor: customBackgroundCoal,
+    scaffoldBackgroundColor: customWhitePearl,
     appBarTheme: const AppBarTheme(
-      backgroundColor: customSurfaceCoal,
+      backgroundColor: customWhitePearl,
       // This will control the "back" icon
       iconTheme: IconThemeData(color: Colors.white),
       // This will control action icon buttons that locates on the right
-      actionsIconTheme: IconThemeData(color: customWhitePowder),
+      actionsIconTheme: IconThemeData(color: customSurfaceCoal),
       centerTitle: false,
       elevation: 15,
       titleTextStyle: TextStyle(
-        color: customWhitePowder,
+        color: customSurfaceCoal,
         fontWeight: FontWeight.bold,
         fontFamily: 'PermanentMarker',
         fontSize: 40,
@@ -62,17 +62,19 @@ class MainLightTheme {
 }
 
 const ColorScheme _customColorScheme = ColorScheme(
-  primary: customPrimaryCoal,
-  primaryVariant: customWhitePowder,
+  primary: customWhitePowder,
+  // ignore: deprecated_member_use
+  primaryVariant: customSurfaceCoal,
   secondary: Colors.amber,
-  secondaryVariant: customWhitePowder,
+  // ignore: deprecated_member_use
+  secondaryVariant: customSurfaceCoal,
   surface: Colors.purpleAccent,
-  background: customSurfaceCoal,
-  error: customWhitePowder,
-  onPrimary: Colors.white,
-  onSecondary: customSurfaceCoal,
-  onSurface: customWhitePearl,
-  onBackground: customWhitePowder,
+  background: customWhitePowder,
+  error: customSurfaceCoal,
+  onPrimary: Colors.black,
+  onSecondary: customWhitePearl,
+  onSurface: customSurfaceCoal,
+  onBackground: customSurfaceCoal,
   onError: customErrorRed,
-  brightness: Brightness.dark,
+  brightness: Brightness.light,
 );
