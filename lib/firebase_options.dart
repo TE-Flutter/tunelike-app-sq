@@ -47,9 +47,9 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDwU1Tch824n_bPKJzA2DGRmNVYO-6S4KQ',
-    appId: '1:1035673747757:web:b7f481c0f3737dace793a4',
-    messagingSenderId: '1035673747757',
+    apiKey: 'AIzaSDDwU1Tch824n_bPKJzA2DGRmNVYO-6S4KQ',
+    appId: '1:1033173747757:web:b7f481c0f373fdace793a4',
+    messagingSenderId: '1035673747751',
     projectId: 'tunelikes',
     authDomain: 'tunelikes.firebaseapp.com',
     storageBucket: 'tunelikes.appspot.com',
@@ -57,21 +57,21 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCaPzwRP-fg1sQHEKcc42K6kNRZd347IxI',
-    appId: '1:1035673747757:android:b4cc23d856dac4e8e793a4',
-    messagingSenderId: '1035673747757',
+    apiKey: 'AIzaSDCaPzwRP-fg1sQHEKcc42K6kNRZd347IxI',
+    appId: '1:1033173747757:android:b4cc23d85fdac4e8e793a4',
+    messagingSenderId: '1035673747751',
     projectId: 'tunelikes',
     storageBucket: 'tunelikes.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyD4329XAUUxPPllcjHC4Pgn7Gb5FP3sCWM',
-    appId: '1:1035673747757:ios:593042b3942778cfe793a4',
-    messagingSenderId: '1035673747757',
+    apiKey: 'AIzaSDD4329XAUUxPPllcjHC4Pgn7Gb5FP3sCWM',
+    appId: '1:1033173747757:ios:593042b394f778cfe793a4',
+    messagingSenderId: '1035673747751',
     projectId: 'tunelikes',
     storageBucket: 'tunelikes.appspot.com',
     iosClientId:
-        '1035673747757-sql14o0vn0edl5v2df1s9nfmsatd0n24.apps.googleusercontent.com',
+        '1035673747757-sql14o0rn0edl5v2df1s9nfmsatd0n24.apps.googleusercontent.com',
     iosBundleId: 'com.tunelike.tunelike',
   );
 }
