@@ -70,7 +70,7 @@ const ColorScheme _customColorScheme = ColorScheme(
   secondaryVariant: customSurfaceCoal,
   surface: Colors.purpleAccent,
   background: customWhitePowder,
-  error: customSurfaceCoal,
+  error: customErrorRed,
   onPrimary: Colors.black,
   onSecondary: customWhitePearl,
   onSurface: customSurfaceCoal,

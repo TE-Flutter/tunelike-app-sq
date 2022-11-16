@@ -11,12 +11,15 @@ class TuneLikeUser {
       {required this.firstName,
       required this.lastName,
       required this.userName,
-      required this.profilePhoto,
-      required this.profilePhotoResized,
-      required this.profilePhotoThumbnail,
-      required this.genres,
-      required this.location,
-      required this.languages});
+      required this.email,
+      required this.password,
+      required this.phoneNumber,
+      this.profilePhoto,
+      this.profilePhotoResized,
+      this.profilePhotoThumbnail,
+      this.genres,
+      this.location,
+      this.languages});
 
   /// Converts a Map to this.
   factory TuneLikeUser.fromMap(Map<String, dynamic> map) {
@@ -24,6 +27,9 @@ class TuneLikeUser {
       firstName: map['first_name'] as String,
       lastName: map['last_name'] as String,
       userName: map['user_name'] as String,
+      email: map['email'] as String,
+      password: map['password'] as String,
+      phoneNumber: map['phoneNumber'] as String,
       profilePhoto: map['profile_photo'] as String?,
       profilePhotoResized: map['profile_photo_resized'] as String?,
       profilePhotoThumbnail: map['profile_photo_thumbnail'] as String?,
@@ -45,6 +51,15 @@ class TuneLikeUser {
 
   /// User's username
   final String userName;
+
+  ///User's email
+  final String email;
+
+  ///User's password
+  final String password;
+
+  ///User's phone number
+  final String phoneNumber;
 
   /// URL to user's profile photo.
   final String? profilePhoto;
@@ -72,6 +87,9 @@ class TuneLikeUser {
     String? profilePhoto,
     String? profilePhotoResized,
     String? profilePhotoThumbnail,
+    String? email,
+    String? password,
+    String? phoneNumber,
     List<Genre>? genres,
     LocationModel? location,
     List<LanguageModel>? languages,
@@ -80,6 +98,9 @@ class TuneLikeUser {
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
       userName: userName ?? this.userName,
+      email: email ?? this.email,
+      password: password ?? this.password,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
       profilePhoto: profilePhoto ?? this.profilePhoto,
       profilePhotoResized: profilePhotoResized ?? this.profilePhotoResized,
       profilePhotoThumbnail:
@@ -96,6 +117,9 @@ class TuneLikeUser {
       'first_name': firstName,
       'last_name': lastName,
       'user_name': userName,
+      'email': email,
+      'password': password,
+      'phoneNumber': phoneNumber,
       'profile_photo': profilePhoto,
       'profile_photo_resized': profilePhotoResized,
       'profile_photo_thumbnail': profilePhotoThumbnail,
@@ -121,6 +145,7 @@ class TuneLikeUser {
         other.firstName == firstName &&
         other.lastName == lastName &&
         other.userName == userName &&
+        other.email == email &&
         other.profilePhoto == profilePhoto &&
         other.profilePhotoResized == profilePhotoResized &&
         other.profilePhotoThumbnail == profilePhotoThumbnail;

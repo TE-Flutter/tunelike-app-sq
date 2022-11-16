@@ -21,14 +21,12 @@ class MainDarkTheme {
         color: customWhitePowder,
         fontSize: 18,
         fontWeight: FontWeight.bold,
-        backgroundColor: customBackgroundCoal,
       ),
       caption: TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.bold,
         fontStyle: FontStyle.italic,
         color: customWhitePowder,
-        backgroundColor: customPrimaryCoal,
       ),
       headline1: TextStyle(
         color: customWhitePowder,
@@ -42,9 +40,9 @@ class MainDarkTheme {
         fontWeight: FontWeight.bold,
       ),
     ),
-    scaffoldBackgroundColor: customBackgroundCoal,
+    scaffoldBackgroundColor: customSurfaceCoal,
     appBarTheme: const AppBarTheme(
-      backgroundColor: customSurfaceCoal,
+      backgroundColor: Colors.black,
       // This will control the "back" icon
       iconTheme: IconThemeData(color: Colors.white),
       // This will control action icon buttons that locates on the right
@@ -68,11 +66,11 @@ const ColorScheme _customColorScheme = ColorScheme(
   secondary: Colors.amber,
   // ignore: deprecated_member_use
   secondaryVariant: customWhitePowder,
-  surface: Colors.purpleAccent,
+  surface: Color.fromARGB(255, 176, 169, 169),
   background: customSurfaceCoal,
-  error: customWhitePowder,
+  error: customErrorRed,
   onPrimary: Colors.white,
-  onSecondary: customSurfaceCoal,
+  onSecondary: customBackgroundCoal,
   onSurface: customWhitePearl,
   onBackground: customWhitePowder,
   onError: customErrorRed,
