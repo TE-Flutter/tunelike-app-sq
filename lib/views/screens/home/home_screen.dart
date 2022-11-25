@@ -1,6 +1,16 @@
-import 'package:firebase_core/firebase_core.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import './post_component.dart';
+
+List<PostComponent> mockPosts = [
+  const PostComponent(
+      title: 'Test post title',
+      content:
+          'Test post content\nwith a new line\nand another line\n\nthis post is very big actually\nneed more data to fill here\nhmm',
+      imageUrl:
+          'https://img.freepik.com/free-vector/glowing-musical-pentagram-background-with-sound-notes_1017-31220.jpg?w=2000',
+      allowComment: true)
+];
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -10,25 +20,28 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // int? currentID;
-
   @override
   Widget build(BuildContext context) {
-    return
-        // FirebaseFirestore.instance
-        //             .collection('Users')
-        //             .where('UserID' == currentID) ==
-        //         null
-        //     ? const Scaffold()
-        //     :
-        Scaffold(
+    return Scaffold(
       appBar: AppBar(
-          title: const Text('TuneLike'), centerTitle: true, elevation: 0),
-      // appBar: MyAppbar(title: const Text('TuneLike')),
-      body: const Center(
-        child: Text(
-          'Home',
-        ),
+          title: const Text('Feed'),
+          centerTitle: true,
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(
+                Icons.logout_rounded,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+              },
+            ),
+          ]),
+      body: ListView.builder(
+        itemCount: mockPosts.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Container(child: mockPosts[index]);
+        },
       ),
     );
   }

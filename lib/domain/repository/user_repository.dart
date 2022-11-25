@@ -7,28 +7,27 @@ import '../model/user.dart';
 @immutable
 class TuneLikeUser {
   /// Data model for a feed user's extra data.
-  const TuneLikeUser(
-      {required this.firstName,
-      required this.lastName,
-      required this.userName,
-      required this.email,
-      required this.password,
-      required this.phoneNumber,
-      this.profilePhoto,
-      this.profilePhotoResized,
-      this.profilePhotoThumbnail,
-      this.genres,
-      this.location,
-      this.languages});
+  const TuneLikeUser({
+    required this.id,
+    required this.fullName,
+    required this.userName,
+    required this.email,
+    required this.phoneNumber,
+    this.profilePhoto,
+    this.profilePhotoResized,
+    this.profilePhotoThumbnail,
+    this.genres,
+    this.location,
+    this.languages,
+  });
 
   /// Converts a Map to this.
   factory TuneLikeUser.fromMap(Map<String, dynamic> map) {
     return TuneLikeUser(
-      firstName: map['first_name'] as String,
-      lastName: map['last_name'] as String,
+      id: map['id'] as String,
+      fullName: map['full_name'] as String,
       userName: map['user_name'] as String,
       email: map['email'] as String,
-      password: map['password'] as String,
       phoneNumber: map['phoneNumber'] as String,
       profilePhoto: map['profile_photo'] as String?,
       profilePhotoResized: map['profile_photo_resized'] as String?,
@@ -43,20 +42,16 @@ class TuneLikeUser {
   factory TuneLikeUser.fromJson(String source) =>
       TuneLikeUser.fromMap(json.decode(source) as Map<String, dynamic>);
 
-  /// User's first name
-  final String firstName;
+  final String id;
 
-  /// User's last name
-  final String lastName;
+  /// User's full name
+  final String fullName;
 
   /// User's username
   final String userName;
 
   ///User's email
   final String email;
-
-  ///User's password
-  final String password;
 
   ///User's phone number
   final String phoneNumber;
@@ -81,25 +76,22 @@ class TuneLikeUser {
 
   /// Convenient method to replace certain fields.
   TuneLikeUser copyWith({
-    String? firstName,
-    String? lastName,
+    String? fullName,
     String? userName,
     String? profilePhoto,
     String? profilePhotoResized,
     String? profilePhotoThumbnail,
     String? email,
-    String? password,
     String? phoneNumber,
     List<Genre>? genres,
     LocationModel? location,
     List<LanguageModel>? languages,
   }) {
     return TuneLikeUser(
-      firstName: firstName ?? this.firstName,
-      lastName: lastName ?? this.lastName,
+      id: id,
+      fullName: fullName ?? this.fullName,
       userName: userName ?? this.userName,
       email: email ?? this.email,
-      password: password ?? this.password,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       profilePhoto: profilePhoto ?? this.profilePhoto,
       profilePhotoResized: profilePhotoResized ?? this.profilePhotoResized,
@@ -113,17 +105,21 @@ class TuneLikeUser {
 
   /// Converts this model to a Map.
   Map<String, dynamic> toMap() {
+    var genreList = [];
+    for (int i = 0; i < genres!.length; i++) {
+      genreList.add(genres![i].name);
+    }
+
     return {
-      'first_name': firstName,
-      'last_name': lastName,
+      'id': id,
+      'full_name': fullName,
       'user_name': userName,
       'email': email,
-      'password': password,
       'phoneNumber': phoneNumber,
       'profile_photo': profilePhoto,
       'profile_photo_resized': profilePhotoResized,
       'profile_photo_thumbnail': profilePhotoThumbnail,
-      'genres': genres,
+      'genres': genreList,
       'location': location,
       'languages': languages,
     };
@@ -134,7 +130,7 @@ class TuneLikeUser {
 
   @override
   String toString() {
-    return '''UserData(firstName: $firstName, lastName: $lastName, userName: $userName, profilePhoto: $profilePhoto, profilePhotoResized: $profilePhotoResized, profilePhotoThumbnail: $profilePhotoThumbnail)''';
+    return '''UserData(ID: $id, fullName: $fullName, userName: $userName, profilePhoto: $profilePhoto, profilePhotoResized: $profilePhotoResized, profilePhotoThumbnail: $profilePhotoThumbnail, genres: $genres)''';
   }
 
   @override
@@ -142,8 +138,8 @@ class TuneLikeUser {
     if (identical(this, other)) return true;
 
     return other is TuneLikeUser &&
-        other.firstName == firstName &&
-        other.lastName == lastName &&
+        other.id == id &&
+        other.fullName == fullName &&
         other.userName == userName &&
         other.email == email &&
         other.profilePhoto == profilePhoto &&
@@ -153,9 +149,9 @@ class TuneLikeUser {
 
   @override
   int get hashCode {
-    return firstName.hashCode ^
-        lastName.hashCode ^
+    return fullName.hashCode ^
         userName.hashCode ^
+        email.hashCode ^
         profilePhoto.hashCode ^
         profilePhotoResized.hashCode ^
         profilePhotoThumbnail.hashCode;

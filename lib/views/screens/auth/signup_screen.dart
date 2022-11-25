@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
-import '../../components/rounded_input.dart';
-import 'package:course_example_app/views/components/rounded_button.dart';
+
+import 'package:tunelike/views/components/design.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:course_example_app/domain/repository/user_repository.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:tunelike/domain/repository/user_repository.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -15,8 +14,8 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController secondNameController = TextEditingController();
+  TextEditingController fullNameController = TextEditingController();
+  TextEditingController userNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController emailController = TextEditingController();
 
@@ -26,6 +25,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
       String patttern =
           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
       RegExp regExp = RegExp(patttern);
+
+      // ignore: prefer_is_empty
       if (email.isEmpty || email.length == 0) {
         return 1;
       } else if (!regExp.hasMatch(email)) {
@@ -43,7 +44,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             children: <Widget>[
               Container(
                   alignment: Alignment.center,
-                  padding: const EdgeInsets.all(40),
+                  padding: const EdgeInsets.all(30),
                   child: const Text(
                     'Welcome to TuneLike!',
                     style: TextStyle(fontSize: 20, fontFamily: 'Mosk'),
@@ -55,12 +56,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       Container(
                         padding: const EdgeInsets.all(10),
                         child: RoundedInputWidget(
-                          controller: firstNameController,
-                          labelText: 'First Name',
-                          hintText: 'John',
+                          controller: fullNameController,
+                          labelText: 'Full Name',
+                          hintText: 'John Smith',
                           keyboardType: TextInputType.name,
                           prefixIcon: Icons.person_rounded,
-                          validateMode: AutovalidateMode.onUserInteraction,
                           validateFunction: (value) {
                             if (value!.isEmpty) {
                               return "What is your name mate?";
@@ -76,15 +76,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       Container(
                         padding: const EdgeInsets.all(10),
                         child: RoundedInputWidget(
-                          controller: secondNameController,
-                          labelText: 'Second Name',
-                          hintText: 'Smith',
+                          controller: userNameController,
+                          labelText: 'User Name',
+                          hintText: 'Nagibator',
                           keyboardType: TextInputType.name,
                           prefixIcon: Icons.person_rounded,
-                          validateMode: AutovalidateMode.onUserInteraction,
                           validateFunction: (value) {
                             if (value!.isEmpty) {
-                              return "Please tell us your surname";
+                              return "Please tell us your nickname";
                             } else {
                               return null;
                             }
@@ -102,7 +101,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           hintText: 'example@tunelike.ru',
                           keyboardType: TextInputType.emailAddress,
                           prefixIcon: Icons.email_outlined,
-                          validateMode: AutovalidateMode.onUserInteraction,
                           validateFunction: (value) {
                             int res = validateEmail(value!);
                             if (res == 1) {
@@ -122,7 +120,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           labelText: 'Password',
                           isPassword: true,
                           prefixIcon: Icons.lock_outline,
-                          validateMode: AutovalidateMode.onUserInteraction,
                           validateFunction: (value) {
                             if (value!.length < 8) {
                               return "Password length should be at least 8 characters";
@@ -256,41 +253,49 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  void proceedAccountCreate({String? regType}) {
-    TuneLikeUser user = TuneLikeUser(
-        firstName: firstNameController.text,
-        lastName: secondNameController.text,
-        userName: '',
-        email: emailController.text,
-        password: passwordController.text,
-        phoneNumber: '');
+  void proceedAccountCreate({String? regType}) async {
+    if (_formKey.currentState!.validate()) {
+      TuneLikeUser initUser(User user) {
+        TuneLikeUser tlUser = TuneLikeUser(
+            id: user.uid,
+            fullName: user.displayName!,
+            userName: userNameController.text,
+            email: user.email!,
+            phoneNumber: '');
+        return tlUser;
+      }
 
-    switch (regType) {
-      case 'yandex':
-        //proceed yandex reg
-        break;
-      case 'apple':
-        //apple reg
-        break;
-      case 'vk':
-        //vk reg
-        break;
-      case 'spotify':
-        //spotify reg
-        break;
-      default:
-        RegExp simpleEmailRegex = RegExp(
-            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-        if (user.firstName.isNotEmpty &&
-            user.lastName.isNotEmpty &&
-            user.password.length >= 8 &&
-            simpleEmailRegex.hasMatch(user.email)) {
-          Navigator.pushReplacementNamed(context, '/SignUpScreen/PhoneInput');
-        } else {
-          print('input data is incorrect');
-        }
-        //normal reg with controller values
-        break;
+      switch (regType) {
+        case 'yandex':
+          //proceed yandex reg
+          // Navigator.pushReplacementNamed(context, '/SignUpScreen/PhoneInput',
+          //     arguments: initUser());
+          break;
+        case 'apple':
+          //apple reg
+          break;
+        case 'vk':
+          //vk reg
+          break;
+        case 'spotify':
+          //spotify reg
+          break;
+        default:
+          final result =
+              await FirebaseAuth.instance.createUserWithEmailAndPassword(
+            email: emailController.text,
+            password: passwordController.text,
+          );
+
+          final user = result.user!;
+          await user.updateDisplayName(fullNameController.text);
+          Navigator.pushReplacementNamed(
+            context,
+            '/SignUpScreen/PhoneInput',
+            arguments: initUser(FirebaseAuth.instance.currentUser!),
+          );
+          break;
+      }
     }
   }
 }

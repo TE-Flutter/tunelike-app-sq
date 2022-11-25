@@ -1,6 +1,10 @@
+import 'package:flutter/material.dart';
+
 class Genre {
+  final int id;
   final String name;
-  Genre(this.name);
+  final Color color;
+  Genre({required this.id, required this.name, required this.color});
 
   @override
   bool operator ==(Object other) =>
@@ -61,21 +65,4 @@ class LanguageModel {
 
   @override
   int get hashCode => name.hashCode ^ languageCode.hashCode;
-}
-
-class User {
-  final String name;
-  final List<Genre> genres;
-  final LocationModel location;
-  final List<LanguageModel> languages;
-
-  User(this.name, this.genres, this.location, this.languages);
-
-  User copy(
-      {LocationModel? newLocation,
-      List<Genre>? newGenres,
-      List<LanguageModel>? newLanguages}) {
-    return User(name, newGenres ?? genres, newLocation ?? location,
-        newLanguages ?? languages);
-  }
 }

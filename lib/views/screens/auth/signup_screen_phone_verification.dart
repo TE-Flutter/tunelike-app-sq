@@ -1,24 +1,27 @@
-import 'package:flutter/material.dart';
-
-import '../../components/rounded_button.dart';
+import 'package:tunelike/views/components/design.dart';
+import 'package:tunelike/domain/repository/user_repository.dart';
 
 // ignore: camel_case_types
 class SignUpScreen_PhoneVerification extends StatefulWidget {
-  const SignUpScreen_PhoneVerification({super.key, required this.phoneNumber});
+  const SignUpScreen_PhoneVerification(
+      {super.key, required this.phoneNumber, required this.user});
 
   final String phoneNumber;
+  final TuneLikeUser user;
 
   @override
   State<SignUpScreen_PhoneVerification> createState() =>
       // ignore: no_logic_in_create_state
-      _SignUpScreen_PhoneVerificationState(phoneNumber);
+      _SignUpScreen_PhoneVerificationState(phoneNumber, user);
 }
 
 // ignore: camel_case_types
 class _SignUpScreen_PhoneVerificationState
     extends State<SignUpScreen_PhoneVerification> {
   String phoneNumber;
-  _SignUpScreen_PhoneVerificationState(this.phoneNumber);
+  TuneLikeUser user;
+
+  _SignUpScreen_PhoneVerificationState(this.phoneNumber, this.user);
 
   @override
   Widget build(BuildContext context) {
@@ -100,5 +103,9 @@ class _SignUpScreen_PhoneVerificationState
     );
   }
 
-  void proceedAccountCreate() {}
+  void proceedAccountCreate() {
+    //if code is correct
+    Navigator.pushReplacementNamed(context, '/SignUpScreen/Preferences',
+        arguments: user);
+  }
 }

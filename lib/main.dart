@@ -8,15 +8,17 @@ import './views/color-schemes/light_scheme.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  runApp(MultiProvider(
-    providers: [
-      Provider<MainDarkTheme>(
-        create: (context) => MainDarkTheme(),
-      ),
-      Provider<MainLightTheme>(
-        create: (context) => MainLightTheme(),
-      ),
-    ],
-    child: const TuneLikeApp(),
-  ));
+  runApp(
+    MultiProvider(
+      providers: [
+        Provider<MainDarkTheme>(
+          create: (context) => MainDarkTheme(),
+        ),
+        Provider<MainLightTheme>(
+          create: (context) => MainLightTheme(),
+        ),
+      ],
+      child: const TuneLikeApp(),
+    ),
+  );
 }
